@@ -1,3 +1,6 @@
+include("js/Invader.js");
+include("js/Player.js");
+
 var Game = function(canvasId) {
 	var canvas = document.getElementById(canvasId);
 	var screen = canvas.getContext('2d');
@@ -6,7 +9,7 @@ var Game = function(canvasId) {
 		y: canvas.height
 	};
 
-	this.bodies = [new Player(this, gameSize)];
+	this.bodies = createInvaders(this).concat([new Player(this, gameSize)]);
 
 	var self = this;
 	var tick = function() {
@@ -52,4 +55,16 @@ var clearCanvas = function(screen, gameSize) {
 
 var drawRect = function(screen, body) {
 	screen.fillRect(body.position.x, body.position.y, body.size.width, body.size.height);
+}	
+
+var createInvaders = function(game) {
+	var invaders = [];
+
+	for (var i=0; i< 24; i++) {
+		var x = 30 + (i%8) * 30;
+		var y = 30 + (i%3) * 30;
+
+		invaders.push(new Invader(game, {x:x, y:y}))
+	}
+	return invaders;
 }

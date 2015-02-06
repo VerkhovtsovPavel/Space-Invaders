@@ -1,6 +1,4 @@
 ;(function(){
-
-    include("js/Player.js");
     include("js/Game.js")
 
 	window.onload = function(){
