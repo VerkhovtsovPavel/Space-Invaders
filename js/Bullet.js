@@ -10,3 +10,5 @@ Bullet.prototype = {
 		this.position.y += this.velocity.y;
 	}
 }
+
+

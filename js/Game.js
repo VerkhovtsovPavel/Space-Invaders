@@ -10,7 +10,7 @@ var Game = function(canvasId) {
 
 	var self = this;
 	var tick = function() {
-		self.update();
+		self.update(gameSize);
 		self.draw(screen, gameSize);
 		requestAnimationFrame(tick);
 	}
@@ -19,7 +19,15 @@ var Game = function(canvasId) {
 }
 
 Game.prototype = {
-	update: function() {
+	update: function(gameSize) {
+		console.log(this.bodies.length);
+
+		for(var i=0; i< this.bodies.length; i++) {
+			if(this.bodies[i].position.y<0){
+				this.bodies.splice(i,1);
+			}
+		}
+			
 		for(var i=0; i< this.bodies.length; i++) {
 			this.bodies[i].update();
 		}	
