@@ -10,6 +10,8 @@ Invader.prototype = {
 	update: function() {
 		if (this.patrolX < 0 || this.patrolX > 500){
 			this.speedX=-this.speedX;
+			this.position.y += 20;
+			this.speedX+= 5;
 		}
 
 		this.position.x += this.speedX;

@@ -19,7 +19,7 @@ Player.prototype = {
 			this.position.x += 2;
 		}
 		if(this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) && this.bullets) {
-				var bullet = new Bullet({x:this.position.x+this.size.width/2-3/2, y:this.position.y}, {x:0, y:-6})
+				var bullet = new Bullet({x:this.position.x+this.size.width/2-3/2, y:this.position.y - 4}, {x:0, y:-6})
 				this.game.addBody(bullet);
 				this.bullets = false;
 		}	

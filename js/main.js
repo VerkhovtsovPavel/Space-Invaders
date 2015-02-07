@@ -1,12 +1,8 @@
-;(function(){
-    include("js/Game.js")
+include("js/Game.js")
 
-	window.onload = function(){
-		new Game("screen");
-	}
-})();
-
-
+window.onload = function(){
+	new Game("screen");
+}
 
 function include(url) {
     var script = document.createElement('script');

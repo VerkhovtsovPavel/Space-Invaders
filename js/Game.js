@@ -23,8 +23,16 @@ var Game = function(canvasId) {
 
 Game.prototype = {
 	update: function(gameSize) {
-		console.log(this.bodies.length);
+		var bodies = this.bodies;
 
+		var notCollidintWithAnything = function(b1) {
+			return bodies.filter(function(b2) {
+				return colliding(b1, b2);
+			}).length == 0;
+		}
+
+		this.bodies = this.bodies.filter(notCollidintWithAnything);
+ 
 		for(var i=0; i< this.bodies.length; i++) {
 			if(this.bodies[i].position.y<0){
 				this.bodies.splice(i,1);
@@ -55,7 +63,16 @@ var clearCanvas = function(screen, gameSize) {
 
 var drawRect = function(screen, body) {
 	screen.fillRect(body.position.x, body.position.y, body.size.width, body.size.height);
-}	
+}
+
+var	colliding = function(b1, b2) {
+	return !(b1==b2 ||
+			b1.position.x + b1.size.width / 2 < b2.position.x - b2.size.width / 2 	||
+			b1.position.y + b1.size.height / 2 < b2.position.y - b2.size.height / 2 ||
+			b1.position.x - b1.size.width / 2 > b2.position.x + b2.size.width / 2 	||
+			b1.position.y - b1.size.height / 2 > b2.position.y + b2.size.height / 2 );
+
+}
 
 var createInvaders = function(game) {
 	var invaders = [];
