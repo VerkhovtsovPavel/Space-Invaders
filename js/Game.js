@@ -4,17 +4,17 @@ include("js/Player.js");
 var Game = function(canvasId) {
 	var canvas = document.getElementById(canvasId);
 	var screen = canvas.getContext('2d');
-	var gameSize = {
+	this.gameSize = {
 		x: canvas.width,
 		y: canvas.height
 	};
 
-	this.bodies = createInvaders(this).concat([new Player(this, gameSize)]);
+	this.bodies = createInvaders(this).concat([new Player(this)]);
 
 	var self = this;
 	var tick = function() {
-		self.update(gameSize);
-		self.draw(screen, gameSize);
+		self.update(self.gameSize);
+		self.draw(screen, self.gameSize);
 		requestAnimationFrame(tick);
 	}
 
