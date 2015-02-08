@@ -6,7 +6,7 @@ var Player = function(game) {
 	this.timer = 0;
 	this.bullets = true;
 	this.size = {width: 16, height: 16};
-	this.position = {x: game.gameSize.x/2-this.size.width/2, y: game.gameSize.y/10*9-this.size.height/2};
+	this.position = {x: game.gameSize.x/2-this.size.width/2, y: game.gameSize.y/10*8-this.size.height/2};
 	this.keyboarder = new Keyboarder();
 }
 

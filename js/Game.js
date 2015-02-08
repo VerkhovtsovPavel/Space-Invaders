@@ -5,7 +5,7 @@ var Game = function(canvasId) {
 	var canvas = document.getElementById(canvasId);
 	var screen = canvas.getContext('2d');
 	this.stopGame = false;
-	this.playerAlive = true;
+	this.allInvadersDie = false;
 	this.gameSize = {
 		x: canvas.width,
 		y: canvas.height
@@ -17,7 +17,7 @@ var Game = function(canvasId) {
 	var tick = function() {
 		self.update(self.gameSize);
 		self.draw(screen, self.gameSize);
-		if(this.stopGame){
+		if(self.stopGame || self.allInvadersDie){
 			console.log("End Game");
 			return;
 		}
@@ -30,6 +30,7 @@ var Game = function(canvasId) {
 Game.prototype = {
 	update: function(gameSize) {
 		this.stopGame = true;
+		this.allInvadersDie = true;
 
 		var bodies = this.bodies;
 
@@ -42,20 +43,22 @@ Game.prototype = {
 		this.bodies = this.bodies.filter(notCollidintWithAnything);
  
 		for(var i=0; i< this.bodies.length; i++) {
-			if(this.bodies[i].position.y<0 || this.bodies[i].position.y>gameSize.height){
+			if(this.bodies[i].position.y<0 || this.bodies[i].position.y>gameSize.y){
 				this.bodies.splice(i,1);
 			}
 
-			if(this.bodies[i] instanceof Player){
-				this.stopGame = true;
+			if(this.bodies[i] instanceof Invader) {
+				this.allInvadersDie = false;
+
+				if (this.bodies[i].position.y > gameSize.y *0.8) {
+					this.stopGame = true;
+					return;
+				}
 			}
 
-			else if (this.bodies[i] instanceof Invader && this.bodies[i].position.y > gameSize.height / 10 * 9){
-				this.stopGame = true;
+			if(this.bodies[i] instanceof Player) {
+				this.stopGame = false;
 			}
-
-			
-
 		}
 			
 		for(var i=0; i< this.bodies.length; i++) {
