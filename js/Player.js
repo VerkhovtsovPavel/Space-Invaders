@@ -13,13 +13,13 @@ var Player = function(game) {
 Player.prototype = {
 	update: function() {
 		if(this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) && this.position.x > 0) {
-			this.position.x -= 3;
+			this.position.x -= 4;
 		}
 		else if(this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) && this.position.x < this.game.gameSize.x - this.size.width) {
-			this.position.x += 3;
+			this.position.x += 4;
 		}
 		if(this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) && this.bullets) {
-				var bullet = new Bullet({x:this.position.x+this.size.width/2-3/2, y:this.position.y - 4}, {x:0, y:-6})
+				var bullet = new Bullet({x:this.position.x+this.size.width/2-3/2, y:this.position.y - 4}, {x:0, y:-6}, true);
 				this.game.addBody(bullet);
 				this.bullets = false;
 		}	
