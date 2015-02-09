@@ -10,6 +10,14 @@ body {
 	text-align: center;	
 }
 
+#gameResult {
+	color : red;
+	font-family: Courier;
+	font-weight: italic;
+	font-size: 30px;
+	text-align: center;	
+}
+
 canvas {
 	background: white;
 	display: block;

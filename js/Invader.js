@@ -7,15 +7,18 @@ var Invader = function(game, position) {
 	this.fireSpeed = randomValue(0, 500);
 	this.patrolX = 0;
 	this.speedX = 1;
+	this.speedUpX = 0.5;
 }
 
 Invader.prototype = {
 	update: function() {
 		if (this.patrolX < 0 || this.patrolX > 500){
+			this.speedX+=this.speedUpX;
 			this.speedX=-this.speedX;
+			this.speedUpX=-this.speedUpX;
 			this.position.y+=20;
 
-			this.speedX*=1.3;
+			//this.speedX*=1.3;
 		}
 
 		if(this.timer % this.fireSpeed == 0){

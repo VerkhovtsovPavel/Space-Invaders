@@ -19,6 +19,12 @@ var Game = function(canvasId) {
 		self.draw(screen, self.gameSize);
 		if(self.stopGame || self.allInvadersDie){
 			console.log("End Game");
+			if(self.allInvadersDie) {
+				printResult("Win!!");
+			}
+			else {
+				printResult("Lose!!");
+			}
 			return;
 		}
 		requestAnimationFrame(tick);
@@ -50,7 +56,7 @@ Game.prototype = {
 			if(this.bodies[i] instanceof Invader) {
 				this.allInvadersDie = false;
 
-				if (this.bodies[i].position.y > gameSize.y *0.8) {
+				if (this.bodies[i].position.y > gameSize.y *0.8 - this.bodies[i].size.height) {
 					this.stopGame = true;
 					return;
 				}
@@ -110,4 +116,12 @@ var createInvaders = function(game) {
 		invaders.push(new Invader(game, {x:x, y:y}))
 	}
 	return invaders;
+}
+
+function printResult(text){
+	var parentElem = document.body;
+	var outDiv = document.createElement('div');
+	outDiv.id = 'gameResult';
+	outDiv.innerHTML = text;
+	parentElem.appendChild(outDiv);
 }
